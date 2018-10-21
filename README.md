@@ -65,8 +65,8 @@
    "tokenType": "Bearer"
 }</br>
 <b> To Access Any Apis Of Other Services We Should Be Using Above Obtained AccessToken </b> </br>
-<b> For example Authorization header would be </br> 
-Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQwMTI5NjI4LCJleHAiOjE1NDA3MzQ0Mjh9.fvwXFjTV7YlbkLItFg-              kAVfXpW9ciwfM3Lgy2UIKdJNWFcuRFQPW6NKQz_xJ1YaLgpAdq-VRojMuQ6SIXiVHkA <b> </br>
+<b> For example Authorization header would be </b></br> 
+Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQwMTI5NjI4LCJleHAiOjE1NDA3MzQ0Mjh9.fvwXFjTV7YlbkLItFg-              kAVfXpW9ciwfM3Lgy2UIKdJNWFcuRFQPW6NKQz_xJ1YaLgpAdq-VRojMuQ6SIXiVHkA </br>
 <b>Get all Products - (GET) http://<ip_gateway>:8082/products</b></br>
 <b>Get all Users - (GET) http://<ip_gateway>:8082/users</b></br>
 <b>Get user details of user with userId 1 - (GET)  http://<ip_gateway>:8082/users?userId=1</b></br>
