@@ -1,0 +1,1 @@
+ create table if not exists orders (id  bigserial not null, price int4, productname varchar(255), userid int8, primary key (id));

@@ -1,0 +1,43 @@
+eureka: 
+  client: 
+    serviceUrl: 
+      defauleZone: "http://eureka-server:8301/eureka"
+      fetchRegistry: true
+      registerWithEureka: true
+  instance: 
+    hostname: eureka-server
+server: 
+  port: 8082
+spring: 
+  application: 
+    name: zuul
+zuul: 
+  routes: 
+    authservice: 
+      path: /api/auth/**
+      service-id: authservice
+      strip-prefix: false
+    invoicesservice: 
+      path: /invoices/**
+      service-id: invoicesservice
+      strip-prefix: false
+    ordersservice: 
+      path: /order*/**
+      service-id: ordersservice
+      strip-prefix: false
+    productsservice: 
+      path: /product*/**
+      service-id: productsservice
+      strip-prefix: false
+    userservice: 
+      path: /user*/**
+      service-id: userservice
+      strip-prefix: false
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000

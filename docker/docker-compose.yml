@@ -1,0 +1,93 @@
+version: '3'
+services:
+   eureka-server:
+     build: ../EurekaServer/target/docker
+     
+   zuul:
+     build: ../Zuul/target/docker
+     links:
+          - auth
+          - db
+          - eureka-server
+     environment:
+          eureka.client.enabled: 'true'
+          eureka.host: eureka-server
+          eureka.instance.preferIpAddress: 'true' 
+   db:
+     build: postgresmultidb
+     volumes:
+       - sample_db9:/var/lib/postgresql9.5testing/data
+     environment:
+          - POSTGRES_PASSWORD=qwedsa@123
+          - POSTGRES_USER=postgres
+          - POSTGRES_MULTIPLE_DATABASES=orders,invoices,authservicedb,usersdb
+          - PGDATA=/var/lib/postgresql9.5testing/data/pgdata
+     ports:
+          - 5432:5432
+   zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    ports:
+      - "2181:2181"
+   kafka:
+      image: wurstmeister/kafka:1.0.0
+      links:
+         - zookeeper
+      environment:
+          KAFKA_ADVERTISED_HOST_NAME: kafka
+          KAFKA_ADVERTISED_PORT: 9092
+          KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181     
+   orderss:
+       build: ../Orders/target/docker
+       links:
+          - kafka
+          - db
+          - eureka-server
+       environment:
+          SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092  
+          eureka.client.enabled: 'true'
+          eureka.host: eureka-server
+          eureka.instance.preferIpAddress: 'true'  
+   auth:
+       build: ../Auth/target/docker
+       links:
+          - kafka
+          - db
+          - eureka-server
+       environment:
+          SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092  
+          eureka.client.enabled: 'true'
+          eureka.host: eureka-server
+          eureka.instance.preferIpAddress: 'true' 
+   invoices:
+        build: ../Invoices/target/docker
+        links:
+           - kafka
+           - db
+           - eureka-server
+        environment:
+           SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+           eureka.client.enabled: 'true'
+           eureka.host: eureka-server
+           eureka.instance.preferIpAddress: 'true'
+   user:
+        build: ../Users/target/docker
+        links:
+           - kafka
+           - db
+           - eureka-server
+        environment:
+           SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+           eureka.client.enabled: 'true'
+           eureka.host: eureka-server
+           eureka.instance.preferIpAddress: 'true' 
+           
+   product:
+        build: ../Products/target/docker
+        links:
+           - eureka-server
+        environment:
+           eureka.client.enabled: 'true'
+           eureka.host: eureka-server
+           eureka.instance.preferIpAddress: 'true'
+volumes:
+     sample_db9: {}
