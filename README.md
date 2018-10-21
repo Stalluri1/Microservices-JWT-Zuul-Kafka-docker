@@ -39,8 +39,8 @@
   <b>sudo docker container ps</b></br>
   Check for the id of the container which is runnig zuul image and inspect it to get the ip.</br>
   <b>sudo docker inspect <container_id></b></br>
-  Let the ip of the api gateway be <ip_gateway>. </br>
-  <b> Register an user - (POST) http://<ip_gateway>:8082/api/auth/users/signup</b> </br>
+  Let the ip of the api gateway be ip_gateway. </br>
+  <b> Register an user - (POST) http://ip_gateway:8082/api/auth/users/signup</b> </br>
   Payload </br>
   {
   "name":"John",
@@ -53,7 +53,7 @@
    "usernameOrEmail":"john@gmail.com",
    "password":"qwedsa"
   }</br>
- <b> Login of an user - (POST) http://<ip_gateway>:8082/api/auth/signin </b> </br>
+ <b> Login of an user - (POST) http://ip_gateway:8082/api/auth/signin </b> </br>
   Payload </br>
   {
   "usernameOrEmail":"john@gmail.com",
@@ -67,11 +67,11 @@
 <b> To Access Any Apis Of Other Services We Should Be Using Above Obtained AccessToken </b> </br>
 <b> For example Authorization header would be </b></br> 
 Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQwMTI5NjI4LCJleHAiOjE1NDA3MzQ0Mjh9.fvwXFjTV7YlbkLItFg-              kAVfXpW9ciwfM3Lgy2UIKdJNWFcuRFQPW6NKQz_xJ1YaLgpAdq-VRojMuQ6SIXiVHkA </br>
-<b>Get all Products - (GET) http://<ip_gateway>:8082/products</b></br>
-<b>Get all Users - (GET) http://<ip_gateway>:8082/users</b></br>
-<b>Get user details of user with userId 1 - (GET)  http://<ip_gateway>:8082/users?userId=1</b></br>
-<b>Create order for an user with userId 1 - (POST)http://<ip_gateway>:8082/order?userId=1&productname=product3&price=1000</b></br>
+<b>Get all Products - (GET) http://ip_gateway:8082/products</b></br>
+<b>Get all Users - (GET) http://ip_gateway:8082/users</b></br>
+<b>Get user details of user with userId 1 - (GET)  http://ip_gateway:8082/users?userId=1</b></br>
+<b>Create order for an user with userId 1 - (POST)http://ip_gateway:8082/order?userId=1&productname=product3&price=1000</b></br>
 You can use any of the products obtained from above get all products api to place an order.</br>
-<b>Get all orders of an user with userId 1 - (GET) http://<ip_gateway>:8082/orders?userId=1</b></br>
-<b>Get all invoices of an user with userId 1 - (GET) http://<ip_gateway>:8082/invoices?userId=1</b></br>
+<b>Get all orders of an user with userId 1 - (GET) http://ip_gateway:8082/orders?userId=1</b></br>
+<b>Get all invoices of an user with userId 1 - (GET) http://ip_gateway:8082/invoices?userId=1</b></br>
 </p>
